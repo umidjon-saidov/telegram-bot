@@ -1,6 +1,5 @@
 const TelegramBot = require("node-telegram-bot-api");
 const fs = require("fs");
-
 const token = "7365427290:AAH6HqiHW9-Uih2VxThieMDJNM4vX-HbdL0";
 const bot = new TelegramBot(token, { polling: true });
 
@@ -19,7 +18,6 @@ const bootstrap = () => {
       description: "Video yuborish",
     },
   ]);
-
   bot.on("message", async (msg) => {
     const text = msg.text;
     const chatId = msg.chat.id;
