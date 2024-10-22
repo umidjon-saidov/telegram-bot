@@ -34,7 +34,8 @@ const bootstrap = () => {
       );
     } else if (text === "/video") {
       bot.sendMessage(chatId, `Video uchun ism yoki harf yuboring!`);
-      bot.on("message", async (msg) => {
+
+      const messageHandler = async (msg) => {
         const text = msg.text.toLowerCase();
         const videoMapping = {
           avazbek: "video/174C29D83E1FB88533718A4754D145A5_video_dashinit.mp4",
@@ -84,6 +85,7 @@ const bootstrap = () => {
           sh: "video/sh3.mp4",
           ch: "video/ch.mp4",
         };
+
         const videoPath = videoMapping[text];
         if (videoPath) {
           try {
@@ -111,7 +113,13 @@ const bootstrap = () => {
             }
           );
         }
-      });
+
+        // Xabar qabul qilinganidan keyin handlerni o'chirish
+        bot.removeListener("message", messageHandler);
+      };
+
+      // Xabar qabul qilinishi uchun event listenerni o'rnatish
+      bot.on("message", messageHandler);
     }
   });
 };
